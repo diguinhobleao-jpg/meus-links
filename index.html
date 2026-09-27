@@ -4,7 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Oferta Promo Express</title>
+
+  <!-- Pré-visualização para redes sociais (WhatsApp / Telegram) -->
+  <meta property="og:title" content="Oferta Promo Express - Alertas em Tempo Real">
+  <meta property="og:description" content="Entre no nosso grupo VIP e receba as melhores promoções da internet todos os dias!">
+  <meta property="og:image" content="logo.png">
+
+  <!-- Ícones Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
   <style>
     * {
       box-sizing: border-box;
@@ -14,14 +22,15 @@
     }
 
     body {
-      background-color: #000000;
+      /* Fundo com leve gradiente de profundidade */
+      background: radial-gradient(circle at 50% 20%, #15102a 0%, #000000 65%);
       color: #ffffff;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 24px 16px;
+      padding: 32px 16px;
     }
 
     .container {
@@ -33,42 +42,50 @@
       text-align: center;
     }
 
-    /* Foto de Perfil com brilho e indicador de status */
+    /* Foto de Perfil com brilho */
     .avatar-wrapper {
       position: relative;
-      margin-bottom: 20px;
+      margin-bottom: 22px;
     }
 
     .avatar {
-      width: 115px;
-      height: 115px;
+      width: 120px;
+      height: 120px;
       border-radius: 50%;
       object-fit: cover;
       display: block;
-      box-shadow: 0 0 25px rgba(255, 180, 0, 0.25);
+      box-shadow: 0 0 35px rgba(255, 120, 0, 0.35);
+      border: 2px solid rgba(255, 255, 255, 0.1);
     }
 
+    /* Ponto verde piscante (status ao vivo) */
     .status-dot {
       position: absolute;
-      bottom: 6px;
-      right: 6px;
+      bottom: 8px;
+      right: 8px;
       width: 18px;
       height: 18px;
       background-color: #00e676;
       border: 3px solid #000000;
       border-radius: 50%;
+      animation: blink 1.6s infinite ease-in-out;
     }
 
-    /* Título com destaque */
+    @keyframes blink {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(0.85); opacity: 0.5; }
+    }
+
+    /* Títulos */
     .title-white {
-      font-size: 26px;
+      font-size: 28px;
       font-weight: 900;
       letter-spacing: 0.5px;
-      line-height: 1.2;
+      line-height: 1.15;
     }
 
     .title-orange {
-      font-size: 26px;
+      font-size: 28px;
       font-weight: 900;
       color: #ff9800;
       letter-spacing: 0.5px;
@@ -78,12 +95,12 @@
     /* Selos de destaque */
     .badges {
       display: flex;
-      gap: 14px;
+      gap: 12px;
       font-size: 11px;
-      font-weight: 700;
+      font-weight: 800;
       letter-spacing: 0.8px;
-      color: #e0e0e0;
-      margin-bottom: 24px;
+      color: #b0b0b0;
+      margin-bottom: 26px;
       text-transform: uppercase;
     }
 
@@ -92,25 +109,24 @@
       width: 100%;
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 14px;
       margin-bottom: 24px;
     }
 
     .btn {
       width: 100%;
-      padding: 15px 20px;
-      border-radius: 30px;
+      padding: 16px 20px;
+      border-radius: 35px;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
+      gap: 12px;
       text-decoration: none;
       font-weight: 800;
-      font-size: 13.5px;
-      letter-spacing: 0.5px;
+      font-size: 14px;
+      letter-spacing: 0.4px;
       color: #ffffff;
       transition: transform 0.15s ease, filter 0.15s ease;
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
     }
 
     .btn:active {
@@ -118,28 +134,58 @@
     }
 
     .btn i {
-      font-size: 19px;
+      font-size: 20px;
     }
 
+    /* Botão WhatsApp com animação de pulsação */
     .btn-whatsapp {
       background-color: #00c853;
+      box-shadow: 0 4px 18px rgba(0, 200, 83, 0.4);
+      animation: pulse 2.2s infinite ease-in-out;
     }
 
     .btn-whatsapp:hover {
       filter: brightness(1.08);
     }
 
+    @keyframes pulse {
+      0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 200, 83, 0.65); }
+      70% { transform: scale(1.02); box-shadow: 0 0 0 14px rgba(0, 200, 83, 0); }
+      100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 200, 83, 0); }
+    }
+
+    /* Botão Telegram */
     .btn-telegram {
       background-color: #0088cc;
+      box-shadow: 0 4px 18px rgba(0, 136, 204, 0.35);
     }
 
     .btn-telegram:hover {
       filter: brightness(1.08);
     }
 
-    /* Texto de rodapé */
+    /* Mini tags de benefícios */
+    .features-list {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 22px;
+    }
+
+    .feature-tag {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 11.5px;
+      color: #a0a0a0;
+      font-weight: 500;
+    }
+
+    /* Texto de apoio */
     .footer-text {
-      color: #b0b0b0;
+      color: #9e9e9e;
       font-size: 13px;
       line-height: 1.5;
       max-width: 320px;
@@ -149,7 +195,7 @@
 <body>
 
   <div class="container">
-    <!-- Logótipo da Promo Express -->
+    <!-- Logótipo com ponto de status ativo -->
     <div class="avatar-wrapper">
       <img src="logo.png" alt="Promo Express" class="avatar">
       <div class="status-dot"></div>
@@ -159,7 +205,7 @@
     <div class="title-white">CHEGA DE</div>
     <div class="title-orange">PAGAR CARO!</div>
 
-    <!-- Tags informativas -->
+    <!-- Badges centrais -->
     <div class="badges">
       <span>100% GRÁTIS</span>
       <span>•</span>
@@ -168,20 +214,25 @@
 
     <!-- Botões -->
     <div class="btn-group">
-      <!-- Cole o link de convite do seu WhatsApp no href -->
-      <a href="https://chat.whatsapp.com/EE7yw12WTW9Dep5hz9EV2V" target="_blank" class="btn btn-whatsapp">
+      <a href="https://chat.whatsapp.com/SEU_LINK_AQUI" target="_blank" class="btn btn-whatsapp">
         <i class="fa-brands fa-whatsapp"></i>
         <span>ENTRE NO GRUPO VIP DO WHATSAPP</span>
       </a>
 
-      <!-- Cole o link do seu Telegram no href -->
-      <a href="https://t.me/miopeofertas" target="_blank" class="btn btn-telegram">
+      <a href="https://t.me/SEU_LINK_AQUI" target="_blank" class="btn btn-telegram">
         <i class="fa-brands fa-telegram"></i>
         <span>ENTRE NO CANAL DO TELEGRAM</span>
       </a>
     </div>
 
-    <!-- Texto de Apoio -->
+    <!-- Pílulas de vantagens -->
+    <div class="features-list">
+      <span class="feature-tag">⚡ Ofertas e bugs em tempo real</span>
+      <span class="feature-tag">🔒 100% Sem spam</span>
+      <span class="feature-tag">🚪 Saia quando quiser</span>
+    </div>
+
+    <!-- Texto de rodapé -->
     <p class="footer-text">
       entre no nosso grupo VIP e receba as melhores promoções da internet todos os dias!
     </p>
