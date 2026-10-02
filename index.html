@@ -11,7 +11,6 @@
   <meta property="og:image" content="logo.png">
 
   <!-- ================= META PIXEL CODE ================= -->
-  <!-- Meta Pixel Code -->
   <script>
     !function(f,b,e,v,n,t,s)
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -36,7 +35,6 @@
     <img height="1" width="1" style="display:none"
          src="https://www.facebook.com/tr?id=1099253609471359&ev=PageView&noscript=1"/>
   </noscript>
-  <!-- End Meta Pixel Code -->
   <!-- ================= FIM META PIXEL ================= -->
 
   <!-- Ícones Font Awesome -->
@@ -59,6 +57,7 @@
       align-items: center;
       justify-content: center;
       padding: 32px 16px;
+      overflow-x: hidden;
     }
 
     .container {
@@ -218,6 +217,67 @@
       line-height: 1.5;
       max-width: 320px;
     }
+
+    /* Estilo da Notificação Flutuante (Prova Social) */
+    #social-proof-popup {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      background: #ffffff;
+      color: #111111;
+      padding: 12px 16px;
+      border-radius: 12px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      z-index: 9999;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.4s ease;
+      pointer-events: none;
+      max-width: 300px;
+    }
+
+    #social-proof-popup.show {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .popup-avatar {
+      width: 36px;
+      height: 36px;
+      background: #e0e0e0;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #666666;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    .popup-text {
+      font-size: 12.5px;
+      line-height: 1.3;
+    }
+
+    .popup-phone {
+      font-weight: 700;
+      color: #111111;
+    }
+
+    .popup-action {
+      display: inline-block;
+      margin-top: 3px;
+      font-size: 11px;
+      font-weight: 700;
+      color: #ffffff;
+      background: #0088cc;
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
   </style>
 </head>
 <body>
@@ -267,6 +327,61 @@
       entre no nosso grupo VIP e receba as melhores promoções da internet todos os dias!
     </p>
   </div>
+
+  <!-- Caixa da Notificação Flutuante -->
+  <div id="social-proof-popup">
+    <div class="popup-avatar">
+      <i class="fa-solid fa-user"></i>
+    </div>
+    <div class="popup-text">
+      <span class="popup-phone" id="popup-phone-text">(11) 97***-4821</span>
+      <div>acabou de entrar no grupo!</div>
+      <span class="popup-action" id="popup-badge-text">Grupo WhatsApp</span>
+    </div>
+  </div>
+
+  <!-- Script para simular as notificações dinâmicas -->
+  <script>
+    const nomesCidades = ["São Paulo - SP", "Rio de Janeiro - RJ", "Belo Horizonte - MG", "Curitiba - PR", "Salvador - BA", "Porto Alegre - RS", "Brasília - DF", "Fortaleza - CE", "Manaus - AM", "Recife - PE"];
+    const ddds = ["11", "21", "31", "41", "81", "85", "61", "19", "27", "47"];
+    const tiposCanal = [
+      { texto: "Grupo WhatsApp", cor: "#00c853" },
+      { texto: "Canal Telegram", cor: "#0088cc" }
+    ];
+
+    function gerarNumeroAleatorio() {
+      const ddd = ddds[Math.floor(Math.random() * ddds.length)];
+      const parte1 = Math.floor(1000 + Math.random() * 9000);
+      const parte2 = Math.floor(1000 + Math.random() * 9000);
+      return `(${ddd}) 9${Math.floor(Math.random() * 5 + 4)}**-${parte2.toString().slice(-4)}`;
+    }
+
+    function mostrarPopup() {
+      const popup = document.getElementById('social-proof-popup');
+      const phoneEl = document.getElementById('popup-phone-text');
+      const badgeEl = document.getElementById('popup-badge-text');
+
+      // Atualiza com dados novos a cada exibição
+      phoneEl.textContent = gerarNumeroAleatorio();
+      const canalEscolhido = tiposCanal[Math.floor(Math.random() * tiposCanal.length)];
+      badgeEl.textContent = canalEscolhido.texto;
+      badgeEl.style.backgroundColor = canalEscolhido.cor;
+
+      // Mostra a notificação
+      popup.classList.add('show');
+
+      // Esconde após 4 segundos
+      setTimeout(() => {
+        popup.classList.remove('show');
+      }, 4000);
+    }
+
+    // Dispara a primeira notificação após 4 segundos da página carregar
+    setTimeout(mostrarPopup, 4000);
+
+    // Repete a cada 10 segundos
+    setInterval(mostrarPopup, 10000);
+  </script>
 
 </body>
 </html>
