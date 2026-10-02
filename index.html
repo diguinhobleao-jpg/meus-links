@@ -218,10 +218,10 @@
       max-width: 320px;
     }
 
-    /* Estilo da Notificação Flutuante (Prova Social) */
+    /* Estilo da Notificação Flutuante no Topo Esquerdo */
     #social-proof-popup {
       position: fixed;
-      bottom: 20px;
+      top: 20px;
       left: 20px;
       background: #ffffff;
       color: #111111;
@@ -233,7 +233,7 @@
       gap: 12px;
       z-index: 9999;
       opacity: 0;
-      transform: translateY(20px);
+      transform: translateY(-20px);
       transition: all 0.4s ease;
       pointer-events: none;
       max-width: 300px;
@@ -342,7 +342,6 @@
 
   <!-- Script para simular as notificações dinâmicas -->
   <script>
-    const nomesCidades = ["São Paulo - SP", "Rio de Janeiro - RJ", "Belo Horizonte - MG", "Curitiba - PR", "Salvador - BA", "Porto Alegre - RS", "Brasília - DF", "Fortaleza - CE", "Manaus - AM", "Recife - PE"];
     const ddds = ["11", "21", "31", "41", "81", "85", "61", "19", "27", "47"];
     const tiposCanal = [
       { texto: "Grupo WhatsApp", cor: "#00c853" },
@@ -351,7 +350,6 @@
 
     function gerarNumeroAleatorio() {
       const ddd = ddds[Math.floor(Math.random() * ddds.length)];
-      const parte1 = Math.floor(1000 + Math.random() * 9000);
       const parte2 = Math.floor(1000 + Math.random() * 9000);
       return `(${ddd}) 9${Math.floor(Math.random() * 5 + 4)}**-${parte2.toString().slice(-4)}`;
     }
@@ -361,25 +359,19 @@
       const phoneEl = document.getElementById('popup-phone-text');
       const badgeEl = document.getElementById('popup-badge-text');
 
-      // Atualiza com dados novos a cada exibição
       phoneEl.textContent = gerarNumeroAleatorio();
       const canalEscolhido = tiposCanal[Math.floor(Math.random() * tiposCanal.length)];
       badgeEl.textContent = canalEscolhido.texto;
       badgeEl.style.backgroundColor = canalEscolhido.cor;
 
-      // Mostra a notificação
       popup.classList.add('show');
 
-      // Esconde após 4 segundos
       setTimeout(() => {
         popup.classList.remove('show');
       }, 4000);
     }
 
-    // Dispara a primeira notificação após 4 segundos da página carregar
     setTimeout(mostrarPopup, 4000);
-
-    // Repete a cada 10 segundos
     setInterval(mostrarPopup, 10000);
   </script>
 
